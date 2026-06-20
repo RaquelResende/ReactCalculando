@@ -1,11 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import ComponenteCalcular from "./src/Componentes/ComponenteCalcular";
+import ComponenteCalcular from "./src/Componentes/ComponenteCalcular.jsx";
+import ComponenteIndicador from "./src/Componentes/ComponenteIndicador.jsx";
 
 export default function App() {
   return (
     <View style={styles.container}>
       <ComponenteCalcular />
+   
     </View>
   );
 }

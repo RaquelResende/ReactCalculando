@@ -1,14 +1,39 @@
-import { StyleSheet, TextInput, Text, View } from "react-native";
+import { StyleSheet, TextInput, Text, View, Button } from "react-native";
+import { useState } from "react";
+import ComponenteIndicador from "./ComponenteIndicador";
 
 export default function ComponenteCalcular() {
+  const [altura, setAltura] = useState("");
+  const [peso, setPeso] = useState("");
+  const [imc, setImc] = useState("");
+
+  function calcularImc() {
+    if (isNaN(altura) || isNaN(peso)) {
+      alert("Preencha os campos para calcular o IMC");
+      return;
+    }
+    const valorResultado = peso / Math.pow(altura, 2);
+    setImc(valorResultado.toFixed(2));
+  }
+
   return (
     <View style={style.Conteiner}>
       <Text style={style.Text1}>Calculando IMC</Text>
-      <TextInput style={style.Imput1} placeholder="Digite seu peso" onChangeText={(altura)=>seTaltura(altura)} />
-      <TextInput style={style.Imput2} onChangeText={(peso)=>setPeso(peso)} placeholder="Digite sua altura" />
+      <TextInput
+        style={style.Imput1}
+        placeholder="Digite seu altura"
+        onChangeText={setAltura}
+      />
+      <TextInput
+        style={style.Imput2}
+        onChangeText={setPeso}
+        placeholder="Digite sua Peso"
+      />
 
-      <button title="Calcular" onPress={(valor) => {}} />
+      <Button title="Calcular" onPress={calcularImc} />
 
+      {imc !== "" && <ComponenteIndicador imc={Number(imc)} />}
+      <Text style={style.Text2}>{imc}</Text>
     </View>
   );
 }
@@ -16,13 +41,18 @@ export default function ComponenteCalcular() {
 const style = StyleSheet.create({
   Conteiner: {
     flex: 1,
-    backgraoundColor: "#fff",
+    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
   Text1: {
     fontSize: 30,
-    fontWeigth: "bold",
+    fontWeight: "bold",
+    marginBottom: 20,
+  },
+  Text2: {
+    fontSize: 30,
+    fontWeight: "bold",
     marginBottom: 20,
   },
   Imput1: {
@@ -37,7 +67,7 @@ const style = StyleSheet.create({
     padding: 10,
     borderWidth: 1,
     borderColor: "000",
-    boderRadius: 5,
+    borderRadius: 5,
     marginBottom: 10,
     width: "80%",
     borderCurve: 5,
